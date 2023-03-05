@@ -25,6 +25,8 @@ namespace WebApp
             // Dependency Injection for Use Cases and Repositories
             builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();
             builder.Services.AddTransient<IAddCategoryUseCase,  AddCategoryUseCase>();
+            builder.Services.AddTransient<IEditCategoryUseCase, EditCategoryUseCase>();
+            builder.Services.AddTransient<IGetCategoryByIdUseCase, GetCategoryByIdUseCase>();
 
             var app = builder.Build();
 
