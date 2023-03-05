@@ -47,5 +47,10 @@ namespace Plugins.DataStore.InMemory
         {
             return categories?.FirstOrDefault(x => x.CategoryId == categoryId);
         }
+
+        public void DeleteCategory(int categoryId)
+        {
+            categories?.Remove(GetCategoryById(categoryId));
+        }
     }
 }
