@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Plugins.DataStore.InMemory;
+using UseCases;
 using UseCases.CategoriesUseCases;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.UseCaseInterfaces;
@@ -21,6 +22,7 @@ namespace WebApp
 
             // Dependency Injection for In-Memory Data Store
             builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
+            builder.Services.AddScoped<IProductRepository, ProductInMemoryRepository>();
 
             // Dependency Injection for Use Cases and Repositories
             builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();
@@ -28,6 +30,7 @@ namespace WebApp
             builder.Services.AddTransient<IEditCategoryUseCase, EditCategoryUseCase>();
             builder.Services.AddTransient<IGetCategoryByIdUseCase, GetCategoryByIdUseCase>();
             builder.Services.AddTransient<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
+            builder.Services.AddTransient<IViewProductsUseCase, ViewProductsUseCase>();
 
             var app = builder.Build();
 
