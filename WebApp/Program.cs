@@ -31,6 +31,7 @@ namespace WebApp
             builder.Services.AddTransient<IGetCategoryByIdUseCase, GetCategoryByIdUseCase>();
             builder.Services.AddTransient<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
             builder.Services.AddTransient<IViewProductsUseCase, ViewProductsUseCase>();
+            builder.Services.AddTransient<IAddProductUseCase, AddProductUseCase>();
 
             var app = builder.Build();
 

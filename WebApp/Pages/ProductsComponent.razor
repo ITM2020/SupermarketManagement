@@ -31,6 +31,8 @@
         </tbody>
     </table>
 }
+<br />
+<button type="button" @onclick="OnClickAddProduct" class="btn btn-primary">Add Product</button>
 
 @code {
     private IEnumerable<Product> products;
@@ -40,5 +42,10 @@
         base.OnInitialized();
 
         products = ViewProductsUseCase.Execute();
+    }
+
+    private void OnClickAddProduct()
+    {
+        NavigationManager.NavigateTo("/addproduct");
     }
 }
