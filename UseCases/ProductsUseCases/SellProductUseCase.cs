@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.UseCaseInterfaces;
 
-namespace UseCases
+namespace UseCases.ProductsUseCases
 {
     public class SellProductUseCase : ISellProductUseCase
     {
