@@ -1,6 +1,6 @@
 ﻿using CoreBusiness;
 
-namespace UseCases.CategoriesUseCases
+namespace UseCases.UseCaseInterfaces
 {
     public interface IGetCategoryByIdUseCase
     {
