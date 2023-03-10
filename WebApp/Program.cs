@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
 using Plugins.DataStore.InMemory;
 using Plugins.DataStore.SQL;
-using UseCases;
 using UseCases.CategoriesUseCases;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.ProductsUseCases;
 using UseCases.UseCaseInterfaces;
 using WebApp.Data;
+using Microsoft.AspNetCore.Identity;
+using UseCases.Transactions;
 
 namespace WebApp
 {
@@ -27,6 +28,21 @@ namespace WebApp
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", p => p.RequireClaim("Position", "Admin"));
+                options.AddPolicy("CashierOnly", p => p.RequireClaim("Position", "Cashier"));
+            });
+
+            // Identity            
+            // had to add this 
+            builder.Services.AddDbContext<AccountContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("AccountContextConnection"))
+            );
+            // generated from scaffolding
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<AccountContext>();
 
             // Dependency Injection for In-Memory Data Store
             //builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
@@ -71,6 +87,10 @@ namespace WebApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.MapRazorPages();
             app.MapBlazorHub();
             app.MapFallbackToPage("/_Host");
 
